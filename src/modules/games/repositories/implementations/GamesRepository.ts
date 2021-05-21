@@ -29,6 +29,7 @@ export class GamesRepository implements IGamesRepository {
     // referencia: https://typeorm.io/#/relational-query-builder
     return this.repository
       .createQueryBuilder('games')
+      // .where("game.id = :id", { id })
       .relation(Game, 'users')
       .of(id)
       .loadMany();
