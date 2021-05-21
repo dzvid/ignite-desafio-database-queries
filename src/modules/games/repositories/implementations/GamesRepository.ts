@@ -14,20 +14,20 @@ export class GamesRepository implements IGamesRepository {
 
   async findByTitleContaining(param: string): Promise<Game[]> {
     // Complete usando query builder
-    return this.repository
+    return await this.repository
       .createQueryBuilder("games")
       .where(`games.title ILIKE :param`, {param: `%${param}%`})
       .getMany();
   }
 
   async countAllGames(): Promise<[{ count: string }]> {
-    return this.repository.query("SELECT COUNT(*) FROM games"); // Complete usando raw query
+    return await this.repository.query("SELECT COUNT(*) FROM games"); // Complete usando raw query
   }
 
   async findUsersByGameId(id: string): Promise<User[]> {
     // Complete usando query builder
     // referencia: https://typeorm.io/#/relational-query-builder
-    return this.repository
+    return await this.repository
       .createQueryBuilder('games')
       // .where("game.id = :id", { id })
       .relation(Game, 'users')
